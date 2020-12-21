@@ -74,5 +74,126 @@ pipeline {
         }
       }
     }
+    stage ('Create SAML Local IdP on F5'){
+      steps{
+        script{
+          sh label: 'Create IDP',
+          returnStatus: true,
+          script: """curl -k --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/tm/apm/sso/saml\' \\
+          --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
+          --header \'Content-Type: application/json\' \\
+          --data-raw \'{
+              "name": "${TENANT}_idp",
+              "partition": "Common",
+              "encryptSubject": "false",
+              "encryptionTypeSubject": "aes128",
+              "entityId": "https://${TENANT}_idp.cloudmegalodon.com",
+              "idpCertificate": "/Common/default.crt",
+              "idpCertificateReference": {
+                  "link": "https://localhost/mgmt/tm/sys/file/ssl-cert/~Common~default.crt?ver=15.1.0.2"
+              },
+              "idpScheme": "https",
+              "idpSignkey": "/Common/default.key",
+              "idpSignkeyReference": {
+                  "link": "https://localhost/mgmt/tm/sys/file/ssl-key/~Common~default.key?ver=15.1.0.2"
+              },
+              "keyTransportAlgorithm": "rsa-oaep",
+              "locationSpecific": "false",
+              "logLevel": "notice",
+              "samlProfiles": [
+                  "web-browser-sso",
+                  "ecp"
+              ],
+              "subjectType": "email-address",
+              "subjectValue": "%{session.ad.last.attr.name}"
+          }
+          \'"""
+        }
+      }
+    }
+  stage('Link External SAML SP Connector with Local SAML IDP'){
+    steps{
+      script{
+        sh label: 'Link External SAML SP Connector with Local SAML IDP',
+        returnStatus: true,
+        script: """curl -k --location --request PATCH \'https://govf5openshift0.cloudmegalodon.us/mgmt/tm/apm/sso/saml/~Common~${TENANT}_idp\' \\
+        --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
+        --header \'Content-Type: application/json\' \\
+        --data-raw \'{
+            "spConnectors": [
+                "/Common/${TENANT}_sp"
+            ]
+
+        }\'"""
+      }
+    }
+  }
+  stage('Create SAML Resource'){
+    steps{
+      script{
+        sh label: 'Create SAML Resource',
+        returnStatus: true,
+        script: """curl -k --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/tm/apm/sso/saml-resource\' \\
+        --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
+        --header \'Content-Type: application/json\' \\
+        --data-raw \'{
+            "name": "${TENANT}_SamlResource",
+            "locationSpecific": "false",
+            "publishOnWebtop": "true",
+            "ssoConfigSaml": "/Common/${TENANT}_idp"
+        }
+        \'"""
+      }
+    }
+  }
+  stage('Add SAML Resource to Webtop AD resource assignment'){
+    steps{
+      script{
+        sh label: 'Add SAML Resource to Webtop AD group resource assignment',
+        returnStatus: true,
+        script: """curl -k --location --request PATCH \'https://govf5openshift0.cloudmegalodon.us/mgmt/tm/apm/policy/agent/resource-assign/~Common~testPolicy_act_ad_group_mapping_ag\' \\
+          --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
+          --header \'Content-Type: application/json\' \\
+          --data-raw \' {
+              "rules": [
+                          {
+                              "expression": "expr { [string tolower [mcget -decode {session.ad.last.attr.memberOf}]] contains [string tolower \\\\\\"CN=test2,\\\\\\"] }",
+                              "samlResources": [
+                                  "/Common/test_in_gui"
+                              ]
+                          },
+                          {
+                              "expression": "expr { [string tolower [mcget -decode {session.ad.last.attr.memberOf}]] contains [string tolower \\\\\\"CN=test1,\\\\\\"] }",
+                              "samlResources": [
+                                  "/Common/tenant1SamlResource"
+                              ]
+                          },
+                                          {
+                              "expression": "expr { [string tolower [mcget -decode {session.ad.last.attr.memberOf}]] contains [string tolower \\\\\\"CN=${TENANT}_users,\\\\\\"] }",
+                              "samlResources": [
+                                  "/Common/${TENANT}_SamlResource"
+                              ]
+                          }
+                      ]
+
+           }\'"""
+      }
+    }
+  }
+  stage('Commit APM Changes'){
+    steps{
+      script{
+        sh label: 'Commit APM changes',
+        returnStatus: true,
+        script: """curl -k --location --request PATCH \'https://govf5openshift0.cloudmegalodon.us//mgmt/tm/apm/profile/access/~Common~testPolicy\' \\
+      --header \'X-F5-Auth-Token: ${F5_TOKEN}\' \\
+      --header \'Content-Type: application/json\' \\
+      --data-raw \'{
+          "generationAction":"increment"
+
+      }\'"""
+      }
+    }
+  }
   }
 }
