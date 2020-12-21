@@ -51,7 +51,7 @@ pipeline {
           --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
           --header \'Content-Type: application/octet-stream\' \\
           --header \'Content-Range: 0-5250/5251\' \\
-          --data-binary \'tenant1.xml\'"""
+          --data-binary \'@tenant1.xml\'"""
         }
       }
     }
