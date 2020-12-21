@@ -2,7 +2,9 @@ pipeline {
 
 
   agent any
+  enviornment {
   TENANT="jsp"
+}
 
   stages {
     stage ('Retrieve F5 auth token'){
