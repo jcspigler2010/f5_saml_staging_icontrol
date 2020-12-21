@@ -18,3 +18,15 @@ curl -k --location --request PATCH 'https://govf5openshift0.cloudmegalodon.us/mg
 --data-raw '{
     "timeout":"36000"
 }'
+
+
+curl -k --location --request POST 'https://govf5openshift0.cloudmegalodon.us/mgmt/tm/apm/sso/saml-sp-connector' \
+--header 'X-F5-Auth-Token: $F5_TOKEN' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+     "name": "${TENANT}_sp",
+     "partition": "Common",
+     "description": "${TENANT}_sp saml sp",
+     "importMetadata": "/var/config/rest/downloads/${TENANT}.xml"
+}
+'
