@@ -1,0 +1,47 @@
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="urn:amazon:webservices" validUntil="2021-11-18T00:00:00Z">
+<SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" WantAssertionsSigned="true">
+<KeyDescriptor use="signing">
+<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:X509Data>
+<ds:X509Certificate>MIIDbTCCAlWgAwIBAgIEJ+jd7DANBgkqhkiG9w0BAQsFADBnMR8wHQYDVQQDExZ1 cm46YW1hem9uOndlYnNlcnZpY2VzMSIwIAYDVQQKExlBbWF6b24gV2ViIFNlcnZp Y2VzLCBJbmMuMRMwEQYDVQQIEwpXYXNoaW5ndG9uMQswCQYDVQQGEwJVUzAeFw0y MDExMTgwMDAwMDBaFw0yMTExMTgwMDAwMDBaMGcxHzAdBgNVBAMTFnVybjphbWF6 b246d2Vic2VydmljZXMxIjAgBgNVBAoTGUFtYXpvbiBXZWIgU2VydmljZXMsIElu Yy4xEzARBgNVBAgTCldhc2hpbmd0b24xCzAJBgNVBAYTAlVTMIIBIjANBgkqhkiG 9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx9mndRmWlzUX29ZalO3xrcg9SNqxao3PucEL QCO3NYW+Y5PKu+CwicfLdC6K/u6uWZfb0zRTCtmgShAIvV8ydBx0YTyh6A2UIIL9 iyYTTRUAeTXHS0jqK7kPBdBF77+SOGkyvBwcc/emTeCWhJZd8YNwfoXM/ZQXEb7U ROHF1tWuttYLS7uvJabfWuZQVibtynfONOP1T4h2CadZXpCEwrlr6Bt/Yl662eEl HIR1B0biroWM2iSVCglOqaj/TeetioYeEP82oOzMLreefNNRYsfnAstT3qL5NagT e6sXyRmMIfCc2TVXU6fyya0utqNHEEOv9Ju8tLIpgrGXNINijwIDAQABoyEwHzAd BgNVHQ4EFgQUdTEzFXgjKLs+jHDJgcRF4Y+BMTMwDQYJKoZIhvcNAQELBQADggEB AMBlWzQ1IPrxq00PpHDiCZpmJGmKTpS/xXZdF9TcOurRk01j1oX63OeNi+gJNqO4 rehODJDHNthNr2MpemxDpyV9DVQY4GoNYJhvPMqNMldrS+DGXCSi0U9Wt+TGo7R7 fuuY4eisBvowSZrkloF0CbWld5U6ZjBIm29EXsv6au70ceYcshM7HbV68+z68YvI PBrxg622kVzvG6UTvvbwJH4GXR6yjsrepKCDbyb4iGwKLxWGESdhA+1S9JzPNMKH 09fZTcgOIdoiGlRT54rVkvJgljO2bSaOKnzszb4zDXGTWyFQS92XbNDCu011b/jS LyQPsGWZM/LQ5POuz7lN3QM=</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</KeyDescriptor>
+<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos</NameIDFormat>
+<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</NameIDFormat>
+<AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://signin.aws.amazon.com/saml"/>
+<AttributeConsumingService index="1">
+<ServiceName xml:lang="en">AWS Management Console Single Sign-On</ServiceName>
+<RequestedAttribute isRequired="true" Name="https://aws.amazon.com/SAML/Attributes/Role" FriendlyName="RoleEntitlement"/>
+<RequestedAttribute isRequired="true" Name="https://aws.amazon.com/SAML/Attributes/RoleSessionName" FriendlyName="RoleSessionName"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.1" FriendlyName="eduPersonAffiliation"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.2" FriendlyName="eduPersonNickname"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.3" FriendlyName="eduPersonOrgDN"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.4" FriendlyName="eduPersonOrgUnitDN"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.5" FriendlyName="eduPersonPrimaryAffiliation"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" FriendlyName="eduPersonPrincipalName"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.7" FriendlyName="eduPersonEntitlement"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.8" FriendlyName="eduPersonPrimaryOrgUnitDN"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.9" FriendlyName="eduPersonScopedAffiliation"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" FriendlyName="eduPersonTargetedID"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.11" FriendlyName="eduPersonAssurance"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.2.1.2" FriendlyName="eduOrgHomePageURI"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.2.1.3" FriendlyName="eduOrgIdentityAuthNPolicyURI"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.2.1.4" FriendlyName="eduOrgLegalName"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.2.1.5" FriendlyName="eduOrgSuperiorURI"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:1.3.6.1.4.1.5923.1.2.1.6" FriendlyName="eduOrgWhitePagesURI"/>
+<RequestedAttribute isRequired="false" Name="urn:oid:2.5.4.3" FriendlyName="cn"/>
+</AttributeConsumingService>
+</SPSSODescriptor>
+<Organization>
+<OrganizationName xml:lang="en">Amazon Web Services, Inc.</OrganizationName>
+<OrganizationDisplayName xml:lang="en">AWS</OrganizationDisplayName>
+<OrganizationURL xml:lang="en">https://aws.amazon.com</OrganizationURL>
+</Organization>
+</EntityDescriptor>
