@@ -2,6 +2,7 @@ pipeline {
 
 
   agent any
+  TENANT="jsp"
 
   stages {
     stage ('Retrieve F5 auth token'){
@@ -36,6 +37,20 @@ pipeline {
                 "timeout":"36000"
             }\'"""
           }
+      }
+    }
+    stage ('Upload Federation Meta Data .xml'){
+      steps{
+        script{
+
+          sh label: '',
+          returnStatus: true,
+          script: """curl --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/shared/file-transfer/uploads/${TENANT}.xml\' \\
+          --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
+          --header \'Content-Type: application/octet-stream\' \\
+          --header \'Content-Range: 0-5250/5251\' \\
+          --data-binary \'@/Users/jonathanspigler/projects/milcloud_f5_onboarding/tenant1.xml\'"""
+        }
       }
     }
   }
