@@ -47,7 +47,7 @@ pipeline {
 
           sh label: '',
           returnStatus: true,
-          script: """curl --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/shared/file-transfer/uploads/${TENANT}.xml\' \\
+          script: """curl -k --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/shared/file-transfer/uploads/${TENANT}.xml\' \\
           --header \'X-F5-Auth-Token: $F5_TOKEN\' \\
           --header \'Content-Type: application/octet-stream\' \\
           --header \'Content-Range: 0-5250/5251\' \\
