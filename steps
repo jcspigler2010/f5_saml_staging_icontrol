@@ -1,0 +1,23 @@
+https://cdn.f5.com/websites/devcentral.f5.com/downloads/icontrol-rest-api-user-guide-15-1-0.pdf
+https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm.html
+https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_sso_saml.html
+https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_sso_saml-resource.html
+https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_sso_saml-sp-connector.html
+https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_policy_agent.html
+https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_policy_agent_resource-assign.html
+
+Walk through Jenkins steps
+
+create IDP
+Show IdP in GUI
+Create SP external Connector
+show sp external connector in GUI
+create saml resource
+show saml resource in GUI
+show apm policy in gui
+show the ad_access_agent step
+show how represented in web request
+add ad group
+
+commit
+run jenkins

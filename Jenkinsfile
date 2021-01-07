@@ -3,7 +3,7 @@ pipeline {
 
   agent any
   environment {
-  TENANT="jsp"
+  TENANT="DTRA"
 }
 
   stages {
@@ -159,7 +159,7 @@ pipeline {
                           {
                               "expression": "expr { [string tolower [mcget -decode {session.ad.last.attr.memberOf}]] contains [string tolower \\\\\\"CN=test2,\\\\\\"] }",
                               "samlResources": [
-                                  "/Common/test_in_gui"
+                                  "/Common/tenant1SamlResource"
                               ]
                           },
                           {
