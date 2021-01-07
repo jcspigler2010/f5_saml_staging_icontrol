@@ -157,15 +157,9 @@ pipeline {
           --data-raw \' {
               "rules": [
                           {
-                              "expression": "expr { [string tolower [mcget -decode {session.ad.last.attr.memberOf}]] contains [string tolower \\\\\\"CN=test2,\\\\\\"] }",
-                              "samlResources": [
-                                  "/Common/tenant1SamlResource"
-                              ]
-                          },
-                          {
                               "expression": "expr { [string tolower [mcget -decode {session.ad.last.attr.memberOf}]] contains [string tolower \\\\\\"CN=test1,\\\\\\"] }",
                               "samlResources": [
-                                  "/Common/tenant1SamlResource"
+                                  "/Common/samlResourceTest2"
                               ]
                           },
                                           {

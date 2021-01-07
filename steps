@@ -6,8 +6,11 @@ https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_sso_saml-sp-connector.h
 https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_policy_agent.html
 https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_apm_policy_agent_resource-assign.html
 
+https://code.vmware.com/docs/12676/vmware-cloud-director-api-programming-guide/GUID-6A10E99C-9165-4E49-8BC0-ADC960C60BE2.html#/GUID-2DE23667-A301-4DB3-B34D-7246F19BF8CA.html
+
 Walk through Jenkins steps
 
+Make point that you can't have an existing saml resource created and try to bind a new SP to an existing IDP which is associated to SAML resource
 create IDP
 Show IdP in GUI
 Create SP external Connector
