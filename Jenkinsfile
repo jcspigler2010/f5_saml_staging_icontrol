@@ -4,6 +4,8 @@ pipeline {
   agent any
   environment {
   TENANT="DTRA"
+  PW="something"
+  USER="admin"
 }
 
   stages {
@@ -14,14 +16,14 @@ pipeline {
           F5_TOKEN = sh (
             label: '',
             returnStdout: true,
-            script: '''curl -k --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/shared/authn/login\' \\
+            script: """curl -k --location --request POST \'https://govf5openshift0.cloudmegalodon.us/mgmt/shared/authn/login\' \\
                 --header \'Content-Type: application/json\' \\
                 --data-raw \'{
-                    "username":"admin",
-                    "password":"clearshark123!",
+                    "username":"$USER",
+                    "password":"$PW",
                     "loginProviderName":"tmos"
                 }\' | jq -r \'.token.token\'
-                '''
+                """
         ).trim()
        }
        echo "F5 Token is:  ${F5_TOKEN}"

@@ -3,8 +3,8 @@
 token=$(curl -k --location --request POST 'https://govf5openshift0.cloudmegalodon.us/mgmt/shared/authn/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "username":"admin",
-    "password":"clearshark123!",
+    "username":"$PW",
+    "password":"$USER",
     "loginProviderName":"tmos"
 }' | jq -r '.token.token')
 
